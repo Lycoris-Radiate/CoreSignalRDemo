@@ -46,12 +46,12 @@ namespace WebApplication1.Hubs
                 Connections[loginNo] = Context.ConnectionId;
             }
         }
-        public override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
             Console.WriteLine("Disconnected->ConnectionId:" + this.Context.ConnectionId);
             Connections = Connections.Where(s => s.Value != this.Context.ConnectionId).ToDictionary(s => s.Key, s => s.Value);
-             GetAllUser();
-            return base.OnDisconnectedAsync(exception);
+            await GetAllUser();
+            //return base.OnDisconnectedAsync(exception);
         }
     }
 }
