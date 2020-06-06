@@ -33,13 +33,13 @@ namespace WebApplication1.Controllers
             if (string.IsNullOrWhiteSpace(loginNo))
             {
                 //给所有人推送消息
-                _hubContext.Clients.All.SendAsync("ReceiveMessage", "这是控制器发送的消息");
+                _hubContext.Clients.All.SendAsync("ReceiveMessage", "这是控制器群发的消息");
             }
             else
             {
                 //给指定人推送
                 MessageHub.Connections.TryGetValue(loginNo, out string id);
-                _hubContext.Clients.Client(id).SendAsync("ReceiveMessage", "这是控制器发送的消息");
+                _hubContext.Clients.Client(id).SendAsync("ReceiveMessage", "这是控制器给某个人发送的消息");
             }
         }
     }
