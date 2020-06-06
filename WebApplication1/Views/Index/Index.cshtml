@@ -49,7 +49,9 @@
         });
         //开始连接
         connection.start().then(e => {
-
+            connection.invoke("GetAllUser").catch(err =>
+                console.error(err.toString())
+            );
         }).catch(err => console.error(err.toString()));
 
         //上线

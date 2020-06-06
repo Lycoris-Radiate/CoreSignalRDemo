@@ -31,12 +31,12 @@ namespace WebApplication1.Hubs
             await Clients.All.SendAsync("GetAllUser",JsonConvert.SerializeObject(Connections));
         }
         /// <summary>
-        /// 客户端登录成功保存用户账号和客户端Id
+        /// 客户端上线成功保存用户账号和客户端Id
         /// </summary>
         /// <param name="loginNo"></param>
         public void SendLogin(string loginNo)
         {
-            //判断用户有没有登陆过(没登陆过插入用户名和Id，登陆过修改用户名和Id)
+            //判断用户有没有上线过(没上线过插入用户名和Id，上线过修改用户名和Id)
             if (!Connections.ContainsKey(loginNo))
             {
                 Connections.Add(loginNo, Context.ConnectionId);
@@ -49,8 +49,8 @@ namespace WebApplication1.Hubs
         public override Task OnDisconnectedAsync(Exception exception)
         {
             Console.WriteLine("Disconnected->ConnectionId:" + this.Context.ConnectionId);
-            //Connections = Connections.Where(s => s.Value != this.Context.ConnectionId).ToDictionary(s => s.Key, s => s.Value);
-             //GetAllUser();
+            Connections = Connections.Where(s => s.Value != this.Context.ConnectionId).ToDictionary(s => s.Key, s => s.Value);
+             GetAllUser();
             return base.OnDisconnectedAsync(exception);
         }
     }
