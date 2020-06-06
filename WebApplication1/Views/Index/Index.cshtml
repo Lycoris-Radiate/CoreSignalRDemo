@@ -15,7 +15,7 @@
     </div>
     <div style="text-align: center;margin-top: 5%">
         <input type="text" id="account" placeholder="账号" />
-        <button type="button" id="denglu">登录</button>
+        <button type="button" id="denglu">上线</button>
     </div>
     <div style="text-align: center;margin-top: 5%">
         <input type="text" id="user" placeholder="用户" />
@@ -51,7 +51,7 @@
         
     }).catch(err => console.error(err.toString()));
 
-    //登录
+    //上线
     document.getElementById("denglu").addEventListener("click", function () {
         connection.invoke("SendLogin", document.getElementById('account').value).catch(err =>
             console.error(err.toString())
